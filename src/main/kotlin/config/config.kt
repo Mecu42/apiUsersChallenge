@@ -1,12 +1,14 @@
 package config
-import java.io.FileInputStream
+
 import java.util.Properties
 
 object Config {
     private val props: Properties = Properties()
 
     init {
-        FileInputStream("config.properties").use { props.load(it) }
+        val inputStream = Config::class.java.classLoader.getResourceAsStream("config.properties")
+            ?: throw IllegalStateException("No se encontró el archivo config.properties en resources.")
+        props.load(inputStream)
     }
 
     val name: String get() = props.getProperty("name")
