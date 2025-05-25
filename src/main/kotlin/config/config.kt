@@ -16,6 +16,6 @@ object Config {
     val gender: String get() = props.getProperty("gender")
     val status: String get() = props.getProperty("status")
     val url: String get() = props.getProperty("url")
-    val id: Int get() = props.getProperty("id").toInt()
+    val id: Int? get() = props.getProperty("id")?.toIntOrNull()
     val token: String get() = props.getProperty("token")
 }

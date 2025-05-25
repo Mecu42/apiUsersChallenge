@@ -36,9 +36,14 @@ suspend fun testGetAllUsers() {
     }
 }
 
-suspend fun testGetUserById(id: Int) {
+suspend fun testGetUserById(id: Int?) {
     val api = ApiGetUserDetailService()
     try {
+        if (id == null) {
+            println("ID inválido: no es posible obtener un usuario sin un ID.")
+            return
+        }
+
         val user = api.getUserDetails(id)
         println("Usuario obtenido: ID=${user.id}, Nombre=${user.name}, Email=${user.email}, Género=${user.gender}, Estado=${user.status}")
     } catch (e: Exception) {
@@ -47,6 +52,7 @@ suspend fun testGetUserById(id: Int) {
         api.close()
     }
 }
+
 suspend fun testCreateUser() {
     val api = ApiCreateUserService()
 
