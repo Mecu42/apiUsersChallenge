@@ -23,26 +23,25 @@ data class User(
 
 class ApiUsersService {
 
+    private val json = Json {
+        ignoreUnknownKeys = true
+        prettyPrint = true
+    }
+
     private val client = HttpClient(CIO) {
         install(ContentNegotiation) {
-            json(Json {
-                ignoreUnknownKeys = true
-                prettyPrint = true
-            })
+            json(json)
         }
     }
 
     suspend fun getUsers(): List<User> {
         val response: HttpResponse = client.get(Config.url)
-
         val rawJson = response.bodyAsText()
-    
-        
-        return Json { ignoreUnknownKeys = true }
-            .decodeFromString(rawJson)
+        return json.decodeFromString(rawJson)
     }
 
     suspend fun close() {
         client.close()
     }
 }
+
