@@ -20,7 +20,6 @@ import model.UserResponse
 
 private val logger = KotlinLogging.logger {}
 
-/** Excepción personalizada para el error 404 */
 class ResourceNotFoundException(message: String) : Exception(message)
 
 class ApiGetUserDetailService {

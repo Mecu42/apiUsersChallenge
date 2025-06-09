@@ -19,7 +19,6 @@ import model.UserResponse
 
 private val logger = KotlinLogging.logger {}
 
-/** Excepción personalizada para el error 422 */
 class UnprocessableEntityException(message: String) : Exception(message)
 
 @Serializable
